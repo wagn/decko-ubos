@@ -1,7 +1,7 @@
 developer=http://grasscommons.org/
 url=http://wagn.org/
 maintainer=${developer}
-pkgname=$(basename $(pwd))
+pkgname=decko
 pkgver=1.18.3
 pkgrel=1
 pkgdesc="Wiki platform for collaborating to build custom web systems"
@@ -17,9 +17,8 @@ package() {
     install -m0644 ${startdir}/ubos-manifest.json ${pkgdir}/var/lib/ubos/manifests/${pkgname}.json
 
 # Icons
-# TODO
-#    mkdir -p ${pkgdir}/srv/http/_appicons/$pkgname
-#    install -m644 ${startdir}/appicons/{72x72,144x144}.png ${pkgdir}/srv/http/_appicons/$pkgname/
+    mkdir -p ${pkgdir}/srv/http/_appicons/$pkgname
+    install -m644 ${startdir}/appicons/{72x72,144x144}.png ${pkgdir}/srv/http/_appicons/$pkgname/
 
 # Data directory
     mkdir -p ${pkgdir}/var/lib/${pkgname}
