@@ -1,0 +1,20 @@
+{
+    "type" : "app",
+
+    "roles" : {
+        "apache2" : {
+            "defaultcontext" : "/wagn"
+        },
+        "mysql" : {
+            "appconfigitems" : [
+                {
+                    "type"       : "database",
+                    "name"       : "maindb",
+                    "retentionpolicy"  : "keep",
+                    "retentionbucket"  : "maindb",
+                    "privileges" : "all privileges"
+                }
+            ]
+        }
+    }
+}
