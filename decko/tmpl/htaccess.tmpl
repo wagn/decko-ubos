@@ -1,0 +1,21 @@
+# MultiViews not compatible with Passenger
+Options -MultiViews
+
+# we make heavy use of symlinks.  this is important
+Options +FollowSymLinks
+
+# for uuid gem. variable is used in a custom initializer in wagn (uuid_state_file.rb)
+SetEnv UUID_STATE_FILE off
+
+# Wagn root dir
+PassengerAppRoot /var/cldstr/wagn.org/wagn/ws/${appconfig.appconfigid}
+
+# identifies ApplicationSpawner group; without this Passenger overshares among appconfigs
+PassengerAppGroupName ${site.hostname}-${appconfig.appconfigid}
+
+# relative root for the app; sets Rails env var RAILS_RELATIVE_URL_ROOT
+RackBaseURI ${appconfig.contextorslash}
+
+# turn off passenger error pages with traces
+PassengerFriendlyErrorPages off
+

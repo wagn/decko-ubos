@@ -2,14 +2,16 @@ developer=http://grasscommons.org/
 url=http://wagn.org/
 maintainer=${developer}
 pkgname=decko
-pkgver=1.18.3
+pkgver=1.18.6
 pkgrel=1
 pkgdesc="Wiki platform for collaborating to build custom web systems"
 arch=('any')
 license=("GPL")
 source=("https://github.com/wagn/wagn/archive/v${pkgver}.zip")
+depends=(
+    'smtp-server' )
 options=('!strip')
-sha512sums=('cfd7a80f5c1c74210cd29af9c42f2402fe5f48cb92955ac72f683ea214ec4f627b982d56d609e5340864544a680ece2088d59988df92eee017c08aa0378dda7e')
+sha512sums=('45e4f8682a5e88ef45d658844c1c051468b89204a9e297d967fbde41cee2befb9cd57f69dd3c282820509050af5e5fff7a7fc83205d89ed93e60feaf8c08b596')
 
 package() {
 # Manifest
@@ -24,12 +26,17 @@ package() {
     mkdir -p ${pkgdir}/var/lib/${pkgname}
 
 # Templates
-# TODO
-#    mkdir -p ${pkgdir}/usr/share/${pkgname}/tmpl
-#    cp ${startdir}/tmpl/*.tmpl ${pkgdir}/usr/share/${pkgname}/tmpl
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/tmpl
+    cp ${startdir}/tmpl/* ${pkgdir}/usr/share/${pkgname}/tmpl/
 
+# Initial SQL
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/sql
+    cp ${startdir}/sql/bootstrap.sql ${pkgdir}/usr/share/${pkgname}/sql/
+    
 # Code
     mkdir -p ${pkgdir}/usr/share/${pkgname}/wagn
     cp -r -p ${srcdir}/wagn-${pkgver}/* ${pkgdir}/usr/share/${pkgname}/wagn/
 
+# Logs
+    mkdir -p ${pkgdir}/var/log/${pkgname}
 }

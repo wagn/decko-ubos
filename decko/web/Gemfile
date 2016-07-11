@@ -1,0 +1,14 @@
+source 'http://rubygems.org'
+
+gem 'wagn', :path=>'/usr/share/decko/wagn-gem'
+
+gem 'therubyracer'
+gem 'newrelic_rpm'
+
+gem 'mysql2', '~> 0.3.18'
+
+gem 'dalli'
+
+Dir.glob( 'mod/**{,/*/**}/Gemfile' ).each do |gemfile|
+  instance_eval File.read(gemfile)
+end
