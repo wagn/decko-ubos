@@ -39,8 +39,14 @@
                     "templatelang" : "varsubst"
                 },
                 {
+                    "type"  : "directory",
+                    "name"  : "${appconfig.datadir}",
+                    "uname" : "${apache2.uname}",
+                    "gname" : "${apache2.gname}"
+                },
+                {
                     "type": "symlink",
-                    "source": "/usr/share/decko/wagn/wagn/rails/$1",
+                    "source": "/usr/share/decko/wagn-gem/wagn/rails/$1",
                     "names": [
                         "assets"
                     ]
@@ -54,15 +60,15 @@
                 },
                 {
                     "type": "symlink",
-                    "source": "/usr/share/decko/web/$1",
+                    "source": "/usr/share/decko/wagn-gem/$1",
                     "names": [
-                        ".bundle",
-                        "Gemfile",
+### where is this?                       ".bundle",
+### where is this?                        "Gemfile",
                         "Rakefile",
-                        "config/boot.rb",
+### where is this?                        "config/boot.rb",
 #            "config/airbrake.key", <- Can this be factored out into an accessory?
-                        "config/environment.rb",
-                        "script"
+### where is this?                        "config/environment.rb",
+### where is this?                        "script"
                     ]
                 },
 #                { <- Can this be factored out into an accessory?
@@ -96,7 +102,7 @@
                     "gname" : "${apache2.gname}",
                     "mode"  : "0755",
                     "name"  : "files",
-                    "retention":       "backup",
+                    "retentionpolicy": "keep",
                     "retentionbucket": "uploads"
                 },
                 {
@@ -111,19 +117,12 @@
                     "uname" : "${apache2.uname}",
                     "gname" : "${apache2.gname}",
 
-                    "target": "$1",
+                    "source": "tmpl/$2",
                     "names" : [
-                         "tmpl/config.ru",
-                         "tmpl/Gemfile.lock",
-                         "tmpl/restart.txt"
+                         "config.ru",
+                         "Gemfile.lock",
+                         "restart.txt"
                     ]
-                },
-                {
-                    "type": "file",
-                    "uname": "${apache2.uname}",
-                    "gname": "${apache2.gname}",
-                    "mode": "0666",
-                    "name": "/var/log/decko/${appconfig.appconfigid}.log"
                 }
             ],
             "installers" : [
@@ -157,6 +156,29 @@
                     "source" : "sql/bootstrap.sql"
                 }
             ]
+        }
+    },
+    "customizationpoints" : {
+        "recaptcha_public_key" : {
+            "name"     : "ReCaptcha Public Key",
+            "type"     : "string",
+            "required" : false,
+            "default"  : {
+                "value" : ""
+            }
+        },
+        "recaptcha_private_key" : {
+            "name"     : "ReCaptcha Private Key",
+            "type"     : "string",
+            "required" : false,
+            "default"  : {
+                "value" : ""
+            }
+        },
+        "sender_email" : {
+            "name"     : "Sender e-mail address",
+            "type"     : "email",
+            "required" : true
         }
     }
 }

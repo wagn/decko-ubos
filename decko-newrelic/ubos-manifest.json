@@ -1,0 +1,35 @@
+{
+    "type"  : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "decko"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+#                {
+#                    "type" : "file",
+#                    "name" : "newrelic.yml",
+#                    "template"     : "tmpl/newrelic.yml.tmpl",
+#                    "templatelang" : "varsubst"
+#                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "licensekey" : {
+            "name"     : "NewRelic License Key",
+            "type"     : "string",
+            "required" : true
+        },
+        "appname" : {
+            "name"     : "NewRelict App Name",
+            "type"     : "string",
+            "required" : true,
+            "default"  : {
+                "value" : "Decko on UBOS"
+            }
+        }
+    }
+}

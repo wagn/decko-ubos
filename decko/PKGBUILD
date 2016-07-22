@@ -34,9 +34,13 @@ package() {
     cp ${startdir}/sql/bootstrap.sql ${pkgdir}/usr/share/${pkgname}/sql/
     
 # Code
-    mkdir -p ${pkgdir}/usr/share/${pkgname}/wagn
-    cp -r -p ${srcdir}/wagn-${pkgver}/* ${pkgdir}/usr/share/${pkgname}/wagn/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/wagn-gem
+    cp -r -p ${srcdir}/wagn-${pkgver}/* ${pkgdir}/usr/share/${pkgname}/wagn-gem/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/bin
+    install -m755 ${startdir}/bin/* ${pkgdir}/usr/share/${pkgname}/bin/
 
 # Logs
+    # Should move to systemd journal some day
     mkdir -p ${pkgdir}/var/log/${pkgname}
+    chown http:http ${pkgdir}/var/log/${pkgname}
 }
