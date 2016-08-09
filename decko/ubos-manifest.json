@@ -60,7 +60,7 @@
                     "type": "symlink",
                     "source": "/usr/share/decko/web/$2",
                     "names": [
-### where is this?                       ".bundle",
+?                       "${appconfig.datadir}/.bundle",
                         "${appconfig.datadir}/Gemfile",
                         "${appconfig.datadir}/Rakefile",
                         "${appconfig.datadir}/boot.rb",
