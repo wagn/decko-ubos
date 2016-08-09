@@ -11,9 +11,7 @@
                 "passenger",
                 "ruby",
                 "ruby-bundler",
-                "ruby-mysql",
-#        "nodejs",
-#        "git"
+                "ruby-mysql"
             ],
             "apache2modules" : [
                 "passenger",
@@ -54,21 +52,21 @@
                 {
                     "type": "directory",
                     "names": [
-                        "${appconfig.apache2.dir}/mod",
-                        "${appconfig.apache2.dir}/config"
+                        "${appconfig.datadir}/mod",
+                        "${appconfig.datadir}/config"
                     ]
                 },
                 {
                     "type": "symlink",
-                    "source": "/usr/share/decko/wagn-gem/$1",
+                    "source": "/usr/share/decko/web/$2",
                     "names": [
 ### where is this?                       ".bundle",
-### where is this?                        "Gemfile",
-                        "Rakefile",
-### where is this?                        "config/boot.rb",
+                        "${appconfig.datadir}/Gemfile",
+                        "${appconfig.datadir}/Rakefile",
+                        "${appconfig.datadir}/boot.rb",
 #            "config/airbrake.key", <- Can this be factored out into an accessory?
-### where is this?                        "config/environment.rb",
-### where is this?                        "script"
+                        "${appconfig.datadir}/environment.rb",
+                        "${appconfig.datadir}/script"
                     ]
                 },
 #                { <- Can this be factored out into an accessory?
@@ -80,7 +78,7 @@
 #                },
                 {
                     "type" : "file",
-                    "name" : "config/database.yml",
+                    "name" : "${appconfig.datadir}/config/database.yml",
                     "template"     : "tmpl/database.yml.tmpl",
                     "templatelang" : "varsubst"
                 },
@@ -92,7 +90,7 @@
 #                },
                 {
                     "type" : "file",
-                    "name" : "config/application.rb",
+                    "name" : "${appconfig.datadir}/config/application.rb",
                     "template"     : "tmpl/application.rb.tmpl",
                     "templatelang" : "varsubst"
                 },

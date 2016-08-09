@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'wagn', :path=>'/usr/share/decko/wagn-gem'
+gem 'wagn' # , :path=>'/usr/share/decko/wagn-gem'
 
 gem 'therubyracer'
 gem 'newrelic_rpm'

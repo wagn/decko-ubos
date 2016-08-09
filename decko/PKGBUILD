@@ -9,9 +9,17 @@ arch=('any')
 license=("GPL")
 source=("https://github.com/wagn/wagn/archive/v${pkgver}.zip")
 depends=(
+    'nodejs'
+    'git'
     'smtp-server' )
 options=('!strip')
 sha512sums=('45e4f8682a5e88ef45d658844c1c051468b89204a9e297d967fbde41cee2befb9cd57f69dd3c282820509050af5e5fff7a7fc83205d89ed93e60feaf8c08b596')
+
+build() {
+    [[ -d .bundle ]] || mkdir .bundle
+    cp ${startdir}/web/Gemfile . # need to copy, so Gemfile.lock is here, not in git
+    bundle install --path $(pwd)/.bundle
+}
 
 package() {
 # Manifest
@@ -34,8 +42,8 @@ package() {
     cp ${startdir}/sql/bootstrap.sql ${pkgdir}/usr/share/${pkgname}/sql/
     
 # Code
-    mkdir -p ${pkgdir}/usr/share/${pkgname}/wagn-gem
-    cp -r -p ${srcdir}/wagn-${pkgver}/* ${pkgdir}/usr/share/${pkgname}/wagn-gem/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/web
+    cp -r -p ${startdir}/web/* ${pkgdir}/usr/share/${pkgname}/web/
     mkdir -p ${pkgdir}/usr/share/${pkgname}/bin
     install -m755 ${startdir}/bin/* ${pkgdir}/usr/share/${pkgname}/bin/
 
@@ -43,4 +51,11 @@ package() {
     # Should move to systemd journal some day
     mkdir -p ${pkgdir}/var/log/${pkgname}
     chown http:http ${pkgdir}/var/log/${pkgname}
+
+# Gems
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/wagn-gem
+    cp -r -p ${srcdir}/wagn-${pkgver}/* ${pkgdir}/usr/share/${pkgname}/wagn-gem/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/{bin,gems}
+    cp -r -p ${srcdir}/.bundle ${pkgdir}/usr/share/${pkgname}/.bundle
 }
+
