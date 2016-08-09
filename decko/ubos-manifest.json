@@ -43,24 +43,21 @@
                     "gname" : "${apache2.gname}"
                 },
                 {
-                    "type": "symlink",
-                    "source": "/usr/share/decko/wagn-gem/wagn/rails/$1",
+                    "type": "directory",
                     "names": [
-                        "assets"
+                        "${appconfig.datadir}/config",
+                        "${appconfig.datadir}/mod"
                     ]
                 },
                 {
-                    "type": "directory",
-                    "names": [
-                        "${appconfig.datadir}/mod",
-                        "${appconfig.datadir}/config"
-                    ]
+                    "type": "symlink",
+                    "source": "/usr/share/decko/$2",
+                    "name": "${appconfig.datadir}/.bundle"
                 },
                 {
                     "type": "symlink",
                     "source": "/usr/share/decko/web/$2",
                     "names": [
-?                       "${appconfig.datadir}/.bundle",
                         "${appconfig.datadir}/Gemfile",
                         "${appconfig.datadir}/Rakefile",
                         "${appconfig.datadir}/boot.rb",
@@ -108,7 +105,7 @@
                     "uname" : "${apache2.uname}",
                     "gname" : "${apache2.gname}",
                     "mode"  : "0755",
-                    "name"  : "tmp"
+                    "name"  : "${appconfig.datadir}/tmp"
                 },
                 {
                     "type": "file",
