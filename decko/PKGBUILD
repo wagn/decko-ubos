@@ -2,7 +2,7 @@ developer=http://grasscommons.org/
 url=http://wagn.org/
 maintainer=${developer}
 pkgname=decko
-pkgver=1.18.6
+pkgver=1.21.0
 pkgrel=1
 pkgdesc="Wiki platform for collaborating to build custom web systems"
 arch=('any')
@@ -13,7 +13,7 @@ depends=(
     'git'
     'smtp-server' )
 options=('!strip')
-sha512sums=('45e4f8682a5e88ef45d658844c1c051468b89204a9e297d967fbde41cee2befb9cd57f69dd3c282820509050af5e5fff7a7fc83205d89ed93e60feaf8c08b596')
+sha512sums=('3b9fbd35bd3a31f526fd43689b80f920d37c25cbac84dda00f300066c1feeb4e277729d93e2852ed70615b7221557e7d92d30e96872d93d2c288ffcd325202a8')
 
 build() {
     # Gemfile is generated here, as we know only here where the Wagn sources are
@@ -64,7 +64,7 @@ package() {
 # Initial SQL
     mkdir -p ${pkgdir}/usr/share/${pkgname}/sql
     cp ${startdir}/sql/bootstrap.sql ${pkgdir}/usr/share/${pkgname}/sql/
-    
+
 # Code
     mkdir -p ${pkgdir}/usr/share/${pkgname}/web
     cp -r -p ${startdir}/web/* ${pkgdir}/usr/share/${pkgname}/web/
